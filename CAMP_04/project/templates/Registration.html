@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POP Share Library</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="static/style.css" />
+    <script src="static/script.js" defer></script>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/pic/icon.ico" />
+    <section class="hero">
+      <h1 class="title fadein">POP Share Library</h1>
+    </section>
+  </head>
+
+  <body class="simplebodyimg">
+    <!--ナビゲーションバー-->
+    <nav>
+      <button id="menu-open" class="btn-menu">
+        <svg
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="https://www.w3.org/2000/svg"
+        >
+          <title>メニューを開く</title>
+          <path
+            clip-rule="evenodd"
+            d="m4.25 8c0-.41421.33579-.75.75-.75h14c.4142 0 .75.33579.75.75s-.3358.75-.75.75h-14c-.41421 0-.75-.33579-.75-.75zm0 4c0-.4142.33579-.75.75-.75h14c.4142 0 .75.3358.75.75s-.3358.75-.75.75h-14c-.41421 0-.75-.3358-.75-.75zm.75 3.25c-.41421 0-.75.3358-.75.75s.33579.75.75.75h14c.4142 0 .75-.3358.75-.75s-.3358-.75-.75-.75z"
+            fill-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+      <div id="menu-panel">
+        <button id="menu-close" class="btn-menu">
+          <svg
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="https://www.w3.org/2000/svg"
+          >
+            <title>メニューを閉じる</title>
+            <path
+              clip-rule="evenodd"
+              d="m7.53033 6.46967c-.29289-.29289-.76777-.29289-1.06066 0s-.29289.76777 0 1.06066l4.46963 4.46967-4.46963 4.4697c-.29289.2929-.29289.7677 0 1.0606s.76777.2929 1.06066 0l4.46967-4.4696 4.4697 4.4696c.2929.2929.7677.2929 1.0606 0s.2929-.7677 0-1.0606l-4.4696-4.4697 4.4696-4.46967c.2929-.29289.2929-.76777 0-1.06066s-.7677-.29289-1.0606 0l-4.4697 4.46963z"
+              fill-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+        <ul class="menu-list">
+          <li><a href="{{ url_for('index') }}">My Rack</a></li>
+          <li><a href="{{ url_for('registration') }}">Registration</a></li>
+          <li><a href="{{ url_for('edit')}}">Edit</a></li>
+          <li><a href="{{ url_for('prof') }}">Profile</a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="wrapper">
+      <h2 id="font" class="min-title">Registration Page</h2>
+    </div>
+    <div class="post">
+      <form
+        action="{{ url_for('register') }}"
+        class="min-title"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <label for="title"><b>ContentsName:</b></label>
+        <input
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Contents Name"
+          required
+        />
+        <label for="image"><b>写真をアップロード</b></label>
+        <input type="file" name="image" id="image" accept="image/*" />
+        <label for="selecttion"><b>貸出状況</b></label>
+        <select name="selection" id="selection">
+          <option value="貸出中">貸出中</option>
+          <option value="貸出可能">貸出可能</option>
+          <option value="貸出不可">貸出不可</option>
+        </select>
+        <input id="dibtn" type="submit" value="登録" />
+        <!-- <a href="#"><button id="dibtn" type="submit">MyRackに登録</button></a> -->
+        <a href="{{ url_for('index') }}"
+          ><button id="dibtn" type="submit">MyRackに戻る</button></a
+        >
+      </form>
+    </div>
+  </body>
+</html>

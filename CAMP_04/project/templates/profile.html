@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>POP Share Library</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Brush+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://unpkg.com/ress/dist/ress.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="static/style.css" />
+    <script src="static/script.js" defer></script>
+    <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+    <link rel="shortcut icon" href="/pic/icon.ico" />
+  </head>
+
+  <body class="simplebodyimg">
+    <!-- ヘッダー -->
+    <header>
+      <section class="hero">
+        <h1 class="title fadein">POP Share Library</h1>
+      </section>
+    </header>
+
+    <!--ナビゲーションバー-->
+    <nav>
+      <button id="menu-open" class="btn-menu">
+        <svg
+          height="24"
+          viewBox="0 0 24 24"
+          width="24"
+          xmlns="https://www.w3.org/2000/svg"
+        >
+          <title>メニューを開く</title>
+          <path
+            clip-rule="evenodd"
+            d="m4.25 8c0-.41421.33579-.75.75-.75h14c.4142 0 .75.33579.75.75s-.3358.75-.75.75h-14c-.41421 0-.75-.33579-.75-.75zm0 4c0-.4142.33579-.75.75-.75h14c.4142 0 .75.3358.75.75s-.3358.75-.75.75h-14c-.41421 0-.75-.3358-.75-.75zm.75 3.25c-.41421 0-.75.3358-.75.75s.33579.75.75.75h14c.4142 0 .75-.3358.75-.75s-.3358-.75-.75-.75z"
+            fill-rule="evenodd"
+          ></path>
+        </svg>
+      </button>
+      <div id="menu-panel">
+        <button id="menu-close" class="btn-menu">
+          <svg
+            height="24"
+            viewBox="0 0 24 24"
+            width="24"
+            xmlns="https://www.w3.org/2000/svg"
+          >
+            <title>メニューを閉じる</title>
+            <path
+              clip-rule="evenodd"
+              d="m7.53033 6.46967c-.29289-.29289-.76777-.29289-1.06066 0s-.29289.76777 0 1.06066l4.46963 4.46967-4.46963 4.4697c-.29289.2929-.29289.7677 0 1.0606s.76777.2929 1.06066 0l4.46967-4.4696 4.4697 4.4696c.2929.2929.7677.2929 1.0606 0s.2929-.7677 0-1.0606l-4.4696-4.4697 4.4696-4.46967c.2929-.29289.2929-.76777 0-1.06066s-.7677-.29289-1.0606 0l-4.4697 4.46963z"
+              fill-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+        <ul class="menu-list">
+          <li><a href="{{ url_for('index') }}">My Rack</a></li>
+          <li><a href="{{ url_for('registration') }}">Registration</a></li>
+          <li><a href="{{ url_for('edit')}}">Edit</a></li>
+          <li><a href="{{ url_for('prof') }}">Profile</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <div class="wrapper">
+      <h2 id="font" class="min-title">My Page</h2>
+    </div>
+
+    <div class="profile">
+      <img
+        class="prof_pic"
+        src="static/pic/watanabe.png"
+        alt="プロフィール画像"
+      />
+      <div id="icon"></div>
+
+      <!-- プロフィール編集 -->
+      <button id="open" class="openbtn">プロフィールを編集</button>
+      <section id="modal">
+        <h3>編集</h3>
+        <div class="registration-form">
+          <form method="post">
+            <label for="attachment">添付ファイル</label>
+            <input id="attachment" type="file" name="attachment" />
+
+            <label for="user-name">ユーザー名</label>
+            <input
+              id="user-name"
+              type="text"
+              name="user-name"
+              placeholder="名前を追加"
+              required
+            />
+
+            <label for="note">自己紹介</label>
+            <textarea
+              id="note"
+              name="note"
+              rows="3"
+              placeholder="自己紹介を入力"
+            ></textarea>
+          </form>
+        </div>
+
+        <button id="close">完了して閉じる</button>
+      </section>
+      <div id="mask"></div>
+      <!-- プロフィールのJavaScript -->
+      <script>
+        // プロフィール編集
+        const open = document.querySelector("#open");
+        const close = document.querySelector("#close");
+        const modal = document.querySelector("#modal");
+        const mask = document.querySelector("#mask");
+        const showKeyframes = {
+          opacity: [0, 1],
+          visibility: "visible",
+        };
+        const hideKeyframes = {
+          opacity: [1, 0],
+          visibility: "hidden",
+        };
+        const options = {
+          duration: 800,
+          easing: "ease",
+          fill: "forwards",
+        };
+
+        //モーダルウィンドウを開く
+        open.addEventListener("click", () => {
+          modal.animate(showKeyframes, options);
+          mask.animate(showKeyframes, options);
+        });
+        //モダールウィンドウを閉じる
+        close.addEventListener("click", () => {
+          modal.animate(hideKeyframes, options);
+          mask.animate(hideKeyframes, options);
+        });
+
+        mask.addEventListener("click", () => {
+          close.click();
+        });
+      </script>
+
+      <h3>User name : 青メッシュ</h3>
+      <h3>artist : SnowMan 渡辺翔太</h3>
+      <h3>推し活！！</h3>
+    </div>
+  </body>
+</html>
